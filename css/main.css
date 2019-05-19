@@ -1769,7 +1769,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #cf83d6;
+  background: #95c8fe;
 }
 .feed-link,
 .chat {
@@ -2488,4 +2488,48 @@ embed {
 a,
 span.exturl {
   color: #222;
+}
+h1 {
+  margin-top: 2em;
+  margin-bottom: 0.3em;
+}
+.posts-expand .post-meta {
+  margin: 3px 0 40px 0;
+}
+.links-of-author a::before,
+.links-of-author span.exturl::before {
+  background: #7572a7;
+}
+.page-post-detail .sidebar-toggle-line {
+  background: #7572a7;
+}
+.sidebar-toggle-line {
+  background: #7572a7;
+}
+.back-to-top {
+  color: #7572a7;
+}
+.sidebar-nav .sidebar-nav-active {
+  color: #7572a7;
+  border-bottom-color: #7572a7;
+}
+.sidebar-nav .sidebar-nav-active:hover {
+  color: #7572a7;
+}
+.post-toc .nav .active-current > a {
+  color: #7572a7;
+  border-bottom-color: #7572a7;
+}
+.post-toc .nav .active > a {
+  color: #7572a7;
+  border-bottom-color: #7572a7;
+}
+.post-toc .nav .active-current > a:hover {
+  color: #7572a7;
+}
+.posts-expand {
+  padding-top: 0px;
+}
+.tag-cloud-title {
+  padding-bottom: 40px;
 }
