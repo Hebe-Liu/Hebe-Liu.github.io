@@ -1769,7 +1769,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #c8ffa3;
+  background: #7066e4;
 }
 .feed-link,
 .chat {
@@ -2532,4 +2532,10 @@ h1 {
 }
 .tag-cloud-title {
   padding-bottom: 40px;
+}
+.post-body h2 {
+  font-size: 19px;
+}
+.post-body h3 {
+  font-size: 16px;
 }
