@@ -92,18 +92,18 @@
 
 
 
-  <meta name="description" content="Backup database by mysqldump + crontab">
+  <meta name="description" content="Backup ORACLE database by crontab">
 <meta name="keywords" content="Database">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Automatically Backup Database on Linux - MySQL">
-<meta property="og:url" content="http://yoursite.com/2019/05/23/dbbak/index.html">
+<meta property="og:title" content="Automatically Backup Database on Linux - ORACLE">
+<meta property="og:url" content="http://yoursite.com/2019/05/31/oracle-bak/index.html">
 <meta property="og:site_name" content="The day we stop looking, is the day we die.">
-<meta property="og:description" content="Backup database by mysqldump + crontab">
+<meta property="og:description" content="Backup ORACLE database by crontab">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-03T10:08:41.147Z">
+<meta property="og:updated_time" content="2019-06-03T10:14:27.439Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Automatically Backup Database on Linux - MySQL">
-<meta name="twitter:description" content="Backup database by mysqldump + crontab">
+<meta name="twitter:title" content="Automatically Backup Database on Linux - ORACLE">
+<meta name="twitter:description" content="Backup ORACLE database by crontab">
 
 
 
@@ -111,7 +111,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/05/23/dbbak/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/31/oracle-bak/">
 
 
 
@@ -121,7 +121,7 @@
   };
 </script>
 
-  <title>Automatically Backup Database on Linux - MySQL | The day we stop looking, is the day we die.</title>
+  <title>Automatically Backup Database on Linux - ORACLE | The day we stop looking, is the day we die.</title>
   
 
 
@@ -315,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/dbbak/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/31/oracle-bak/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hebe Liu">
@@ -332,7 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Automatically Backup Database on Linux - MySQL
+          <h1 class="post-title" itemprop="name headline">Automatically Backup Database on Linux - ORACLE
 
               
             
@@ -358,7 +358,7 @@
                 
               
 
-              <time title="Created: 2019-05-23 16:17:01" itemprop="dateCreated datePublished" datetime="2019-05-23T16:17:01+08:00">2019-05-23</time>
+              <time title="Created: 2019-05-31 16:06:21" itemprop="dateCreated datePublished" datetime="2019-05-31T16:06:21+08:00">2019-05-31</time>
             
 
             
@@ -400,15 +400,16 @@
       
 
       
-        <p>Backup database by mysqldump + crontab<br><a id="more"></a></p>
-<h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="Setup-required-directories"><a href="#Setup-required-directories" class="headerlink" title="Setup required directories"></a>Setup required directories</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">mkdir backups</span><br><span class="line">cd backups</span><br><span class="line">mkdir data</span><br><span class="line"></span><br><span class="line">vim auto_backup.sh</span><br></pre></td></tr></table></figure>
-<h3 id="Configure"><a href="#Configure" class="headerlink" title="Configure"></a>Configure</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">date_str=$(date +%Y%m%d)</span><br><span class="line">cd ~/backups/data</span><br><span class="line"></span><br><span class="line"># Delete files older than 10 days</span><br><span class="line">find * -mtime +10 -exec rm \&#123;&#125; \; </span><br><span class="line"></span><br><span class="line"># Backup MySQL db, Change root/123456 into your own settings</span><br><span class="line">mysqldump -u root --password=123456 dbname &gt; backup_$date_str.sql</span><br><span class="line"></span><br><span class="line">echo backup_$date_str.sql OK</span><br><span class="line"></span><br><span class="line"># Upload files using FTP</span><br><span class="line">ftp -n&lt;&lt;!</span><br><span class="line">open 172.19.227.9</span><br><span class="line">user root 123456</span><br><span class="line">binary</span><br><span class="line">prompt</span><br><span class="line">mput *date_str*</span><br><span class="line">close</span><br><span class="line">bye</span><br><span class="line">!</span><br></pre></td></tr></table></figure>
+        <p>Backup ORACLE database by crontab<br><a id="more"></a></p>
+<h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Switch to the user oracle</span><br><span class="line">su - oracle</span><br><span class="line">cd /home/oracle</span><br><span class="line">mkdir dbbak</span><br><span class="line"># The location of database</span><br><span class="line">cd /oracle/product/11.2.0/db_1/bin/</span><br><span class="line">vim auto_backup.sh</span><br></pre></td></tr></table></figure>
+<h3 id="Backup-configure"><a href="#Backup-configure" class="headerlink" title="Backup configure"></a>Backup configure</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">date_str=$(date +%Y%m%d)</span><br><span class="line"></span><br><span class="line">source /home/oracle/.bash_profile</span><br><span class="line"></span><br><span class="line"># Delete files older than 7 days</span><br><span class="line">find /home/oracle/dbbak/* -mtime +7 -exec rm \&#123;&#125; \;</span><br><span class="line"></span><br><span class="line"># Change root/123456 into your own settings</span><br><span class="line">/oracle/product/11.2.0/db_1/bin/exp \</span><br><span class="line">        root/123456 \</span><br><span class="line">        owner=root \</span><br><span class="line">        file=/home/oracle/dbbak/BACKUP_$date_str.dmp \</span><br><span class="line">        log=/home/oracle/dbbak/BACKUP_$date_str.log</span><br><span class="line"></span><br><span class="line">echo backup_$date_str.sql OK</span><br><span class="line"></span><br><span class="line"># Upload files using FTP</span><br><span class="line">ftp -n&lt;&lt;!</span><br><span class="line">open 172.19.227.9</span><br><span class="line">user root 123456</span><br><span class="line">binary</span><br><span class="line">lcd /home/oracle/dbbak</span><br><span class="line">prompt</span><br><span class="line">mput *date_str*</span><br><span class="line">close</span><br><span class="line">bye</span><br><span class="line">!</span><br></pre></td></tr></table></figure>
+<h3 id="Source-configure"><a href="#Source-configure" class="headerlink" title="Source configure"></a>Source configure</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /home/oracle/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>User specific environment and startup programs<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:$HOME/.local/bin:$HOME/bin</span><br><span class="line">export PATH</span><br><span class="line">export NLS_LANG=american_america.UTF8</span><br><span class="line"># The location of database installed</span><br><span class="line">export ORACLE_BASE=/oracle</span><br><span class="line"># The location of database     </span><br><span class="line">export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/db_1 </span><br><span class="line"># INSTANCE_NAME</span><br><span class="line">export ORACLE_SID=orcl  </span><br><span class="line">export ORACLE_UNQNAME=$ORACLE_SID</span><br><span class="line"># Set environment variables</span><br><span class="line">export PATH=$ORACLE_HOME/bin:/user/sbin:$PATH</span><br><span class="line">export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure></p>
 <p>Add the execute permission and test it<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x auto_backup.sh</span><br><span class="line">./auto_backup.sh</span><br></pre></td></tr></table></figure></p>
-<h2 id="Crontab"><a href="#Crontab" class="headerlink" title="Crontab"></a>Crontab</h2><h3 id="Check-if-cron-is-running"><a href="#Check-if-cron-is-running" class="headerlink" title="Check if cron is running"></a>Check if cron is running</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service cron status</span><br><span class="line"># Or</span><br><span class="line">service crond status</span><br></pre></td></tr></table></figure>
-<h3 id="Add-jobs-to-cron"><a href="#Add-jobs-to-cron" class="headerlink" title="Add jobs to cron"></a>Add jobs to cron</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim auto_backup.cron</span><br></pre></td></tr></table></figure>
-<h3 id="Configure-1"><a href="#Configure-1" class="headerlink" title="Configure"></a>Configure</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Minute(0-59) Hour(0-23) Day of Month(1-31) Month(1-12 or Jan-Dec) Day of Week(0-6 or Sun-Sat) Command</span><br><span class="line"># This line executes the &quot;auto_backup.sh&quot; at 5AM everyday</span><br><span class="line">0 5 * * * ~/backups/auto_backup.sh</span><br></pre></td></tr></table></figure>
+<p>Check if cron is running<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service cron status</span><br><span class="line"># Or</span><br><span class="line">service crond status</span><br></pre></td></tr></table></figure></p>
+<h3 id="Add-jobs-to-cron"><a href="#Add-jobs-to-cron" class="headerlink" title="Add jobs to cron"></a>Add jobs to cron</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/oracle</span><br><span class="line">vim auto_backup.cron</span><br></pre></td></tr></table></figure>
+<h3 id="Crontab-configure"><a href="#Crontab-configure" class="headerlink" title="Crontab configure"></a>Crontab configure</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Minute(0-59) Hour(0-23) Day of Month(1-31) Month(1-12 or Jan-Dec) Day of Week(0-6 or Sun-Sat) Command</span><br><span class="line"># This line executes the &quot;auto_backup.sh&quot; at 1AM from Sunday to Friday</span><br><span class="line">0 1 * * 1,2,3,4,5  /oracle/product/11.2.0/db_1/bin/auto_backup.sh</span><br></pre></td></tr></table></figure>
 <h3 id="Restart-service"><a href="#Restart-service" class="headerlink" title="Restart service"></a>Restart service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service cron restart</span><br></pre></td></tr></table></figure>
-<h3 id="Other-crontab-options"><a href="#Other-crontab-options" class="headerlink" title="Other crontab options"></a>Other crontab options</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Display the current crontab</span><br><span class="line">crontab -l</span><br><span class="line"># Remove the current crontab</span><br><span class="line">crontab -r</span><br><span class="line"># Edit the current crontab</span><br><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -445,8 +446,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/19/Redis/" rel="next" title="Setup A Redis Cluster On Centos 7">
-                <i class="fa fa-chevron-left"></i> Setup A Redis Cluster On Centos 7
+              <a href="/2019/05/23/dbbak/" rel="next" title="Automatically Backup Database on Linux - MySQL">
+                <i class="fa fa-chevron-left"></i> Automatically Backup Database on Linux - MySQL
               </a>
             
           </div>
@@ -454,10 +455,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/31/oracle-bak/" rel="prev" title="Automatically Backup Database on Linux - ORACLE">
-                Automatically Backup Database on Linux - ORACLE <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -620,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL"><span class="nav-number">1.</span> <span class="nav-text">MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup-required-directories"><span class="nav-number">1.1.</span> <span class="nav-text">Setup required directories</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure"><span class="nav-number">1.2.</span> <span class="nav-text">Configure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crontab"><span class="nav-number">2.</span> <span class="nav-text">Crontab</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Check-if-cron-is-running"><span class="nav-number">2.1.</span> <span class="nav-text">Check if cron is running</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-jobs-to-cron"><span class="nav-number">2.2.</span> <span class="nav-text">Add jobs to cron</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure-1"><span class="nav-number">2.3.</span> <span class="nav-text">Configure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Restart-service"><span class="nav-number">2.4.</span> <span class="nav-text">Restart service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-crontab-options"><span class="nav-number">2.5.</span> <span class="nav-text">Other crontab options</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backup-configure"><span class="nav-number">2.</span> <span class="nav-text">Backup configure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Source-configure"><span class="nav-number">3.</span> <span class="nav-text">Source configure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-jobs-to-cron"><span class="nav-number">4.</span> <span class="nav-text">Add jobs to cron</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crontab-configure"><span class="nav-number">5.</span> <span class="nav-text">Crontab configure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Restart-service"><span class="nav-number">6.</span> <span class="nav-text">Restart service</span></a></li></ol></div>
             
 
           </div>
