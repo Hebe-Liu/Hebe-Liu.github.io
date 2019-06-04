@@ -92,13 +92,18 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="The day we stop looking, is the day we die.">
-<meta property="og:url" content="http://yoursite.com/tags/Redis/index.html">
+  <meta name="description" content="Backup database by Powershell + Task Scheduler">
+<meta name="keywords" content="SQL Server">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL Server 2008 Automatic Backup">
+<meta property="og:url" content="http://yoursite.com/2019/06/04/powershell/index.html">
 <meta property="og:site_name" content="The day we stop looking, is the day we die.">
+<meta property="og:description" content="Backup database by Powershell + Task Scheduler">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-06-04T07:45:03.239Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The day we stop looking, is the day we die.">
+<meta name="twitter:title" content="SQL Server 2008 Automatic Backup">
+<meta name="twitter:description" content="Backup database by Powershell + Task Scheduler">
 
 
 
@@ -106,7 +111,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/tags/Redis/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/04/powershell/">
 
 
 
@@ -116,7 +121,7 @@
   };
 </script>
 
-  <title>Tag: Redis | The day we stop looking, is the day we die.</title>
+  <title>SQL Server 2008 Automatic Backup | The day we stop looking, is the day we die.</title>
   
 
 
@@ -164,7 +169,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -219,7 +224,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -248,19 +253,6 @@
 
   
     
-
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 
   
 
@@ -307,57 +299,199 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Redis<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/04/powershell/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hebe Liu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/IMG_0340.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The day we stop looking, is the day we die.">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/05/19/Redis/" itemprop="url">
-            
-              <span itemprop="name">Setup A Redis Cluster On Centos 7</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">SQL Server 2008 Automatic Backup
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-19T10:47:17+08:00" content="2019-05-19">
-          05-19
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-04 11:09:40" itemprop="dateCreated datePublished" datetime="2019-06-04T11:09:40+08:00">2019-06-04</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Backup database by Powershell + Task Scheduler<br><a id="more"></a></p>
+<h2 id="Powershell"><a href="#Powershell" class="headerlink" title="Powershell"></a>Powershell</h2><h3 id="Install-dependency"><a href="#Install-dependency" class="headerlink" title="Install dependency"></a>Install dependency</h3><p>Open Powershell as administrator, install the SQL Server PowerShell cmdlet.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Install-Module -Name SqlServer</span><br></pre></td></tr></table></figure></p>
+<h3 id="Backup-Script"><a href="#Backup-Script" class="headerlink" title="Backup Script"></a>Backup Script</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example</span></span><br><span class="line"><span class="variable">$date</span> = <span class="built_in">Get-Date</span> -Format yyyyMMdd</span><br><span class="line"><span class="variable">$dbname</span> = <span class="string">"SQLTestDB"</span> </span><br><span class="line"><span class="variable">$limit</span> = (<span class="built_in">Get-Date</span>).AddDays(-<span class="number">30</span>)</span><br><span class="line"><span class="variable">$path</span> = <span class="string">"D:\BackUp\full_backup"</span></span><br><span class="line"><span class="variable">$backupFile</span> = <span class="variable">$path</span> + <span class="string">'\'</span> + <span class="variable">$dbname</span> + <span class="string">'_fulldb_'</span> + <span class="variable">$date</span>  +<span class="string">'.bak'</span></span><br><span class="line"></span><br><span class="line">Backup-SqlDatabase `</span><br><span class="line">    -ServerInstance <span class="string">"."</span> `</span><br><span class="line">    -Database <span class="variable">$dbname</span> `</span><br><span class="line">    -BackupAction Database `</span><br><span class="line">    -BackupFile <span class="variable">$backupFile</span> `</span><br><span class="line">    -BackupSetName <span class="string">"<span class="variable">$dbname</span>-full database backup"</span></span><br><span class="line">  <span class="comment"># -Incremental </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Automate FTP uploads</span></span><br><span class="line"><span class="comment"># Go to destination</span></span><br><span class="line">cd D:\BackUp\full_backup</span><br><span class="line"></span><br><span class="line"><span class="variable">$location</span> = <span class="built_in">Get-Location</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Get files</span></span><br><span class="line"><span class="variable">$files</span> = <span class="built_in">Get-ChildItem</span> -recurse  </span><br><span class="line"><span class="comment"># Delete expire files</span></span><br><span class="line"><span class="variable">$files</span> | <span class="built_in">Where-Object</span> &#123; <span class="variable">$_</span>.CreationTime <span class="nomarkup">-lt</span> <span class="variable">$limit</span> &#125; | <span class="built_in">Remove-Item</span></span><br><span class="line"><span class="comment"># Get ftp object</span></span><br><span class="line"><span class="variable">$ftp_client</span> = <span class="built_in">New-Object</span> System.Net.WebClient</span><br><span class="line"><span class="variable">$ftp_address</span> = <span class="string">"ftp://root:123456@172.19.227.9"</span></span><br><span class="line"><span class="comment"># Make uploads</span></span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$file</span> <span class="keyword">in</span> <span class="variable">$files</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$file</span>.Name <span class="nomarkup">-like</span> <span class="string">"*<span class="variable">$date</span>*"</span>)&#123;</span><br><span class="line">        <span class="variable">$directory</span> = <span class="string">""</span>;</span><br><span class="line">        <span class="variable">$source</span> = <span class="variable">$file</span>.DirectoryName + <span class="string">"\"</span> + <span class="variable">$file</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$file</span>.DirectoryName.Length <span class="nomarkup">-gt</span> <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="variable">$directory</span> = <span class="variable">$file</span>.DirectoryName.Replace(<span class="variable">$Location</span>,<span class="string">""</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable">$directory</span> += <span class="string">"/"</span>;</span><br><span class="line">        <span class="variable">$ftp_command</span> = <span class="variable">$ftp_address</span> + <span class="variable">$directory</span> + <span class="variable">$file</span></span><br><span class="line">   </span><br><span class="line">        <span class="variable">$uri</span> = <span class="built_in">New-Object</span> System.Uri(<span class="variable">$ftp_command</span>)</span><br><span class="line">        <span class="string">"Command is "</span> + <span class="variable">$uri</span> + <span class="string">" file is <span class="variable">$source</span>"</span></span><br><span class="line">        <span class="variable">$ftp_client</span>.UploadFile(<span class="variable">$uri</span>, <span class="variable">$source</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Run the script to test.</p>
+<h2 id="Using-SQL-Server"><a href="#Using-SQL-Server" class="headerlink" title="Using SQL Server"></a>Using SQL Server</h2><p>In this example, the SQLTestDB database will be backed up to disk at D:\BackUp\full_backup.</p>
+<ol>
+<li>In SQL Server Management studio, right-click SQLTestDB, point to Tasks, and then click Back Up.</li>
+<li>Select Add and enter D:\BackUp\full_backup\SQLTestDB_fulldb_20190603.bak in the file name text box.</li>
+</ol>
+<h2 id="Establish-A-Windows-Scheduled-Task"><a href="#Establish-A-Windows-Scheduled-Task" class="headerlink" title="Establish A Windows Scheduled Task"></a>Establish A Windows Scheduled Task</h2><ol>
+<li>Create Basic Task in the Actions panel</li>
+<li>Enter “SQLTestDB full backup” as a name, Click Next</li>
+<li>In the “Trigger” section, select the “Weekly” or the interval you would like the task to run, Click Next</li>
+<li>On the next screen select your start date, scheduled backup time and day, Click Next</li>
+<li>Under Action select “Start a Program”.  Click Next</li>
+<li>Example on the Start a Program screen:<ul>
+<li>Program/script: powershell</li>
+<li>Add arguments (optional): D:\BackUp\full_db_backup.ps1 # Where the backup script is located</li>
+<li>Start in (optional): D:\BackUp</li>
+</ul>
+</li>
+<li>Finish</li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL-Server/" rel="tag"># SQL Server</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/31/oracle-bak/" rel="next" title="Automatically Backup Database on Linux - ORACLE">
+                <i class="fa fa-chevron-left"></i> Automatically Backup Database on Linux - ORACLE
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -377,8 +511,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -482,6 +625,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Powershell"><span class="nav-number">1.</span> <span class="nav-text">Powershell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-dependency"><span class="nav-number">1.1.</span> <span class="nav-text">Install dependency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backup-Script"><span class="nav-number">1.2.</span> <span class="nav-text">Backup Script</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-SQL-Server"><span class="nav-number">2.</span> <span class="nav-text">Using SQL Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Establish-A-Windows-Scheduled-Task"><span class="nav-number">3.</span> <span class="nav-text">Establish A Windows Scheduled Task</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -620,6 +780,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
 
   
 
@@ -635,6 +799,8 @@
 
   
 
+
+  
 
 
   
