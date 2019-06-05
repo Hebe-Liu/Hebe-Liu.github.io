@@ -92,13 +92,22 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="The day we stop looking, is the day we die.">
-<meta property="og:url" content="http://yoursite.com/tags/MySQL/index.html">
+  <meta name="description" content="Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.">
+<meta name="keywords" content="Systemd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Systemd Unit Configure">
+<meta property="og:url" content="http://yoursite.com/2019/06/05/service/index.html">
 <meta property="og:site_name" content="The day we stop looking, is the day we die.">
+<meta property="og:description" content="Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/06/05/service/log.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/05/service/ls.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/05/service/service.jpg">
+<meta property="og:updated_time" content="2019-06-05T09:54:36.692Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The day we stop looking, is the day we die.">
+<meta name="twitter:title" content="Systemd Unit Configure">
+<meta name="twitter:description" content="Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/05/service/log.jpg">
 
 
 
@@ -106,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/tags/MySQL/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/05/service/">
 
 
 
@@ -116,7 +125,7 @@
   };
 </script>
 
-  <title>Tag: MySQL | The day we stop looking, is the day we die.</title>
+  <title>Systemd Unit Configure | The day we stop looking, is the day we die.</title>
   
 
 
@@ -164,7 +173,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -219,7 +228,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -248,19 +257,6 @@
 
   
     
-
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 
   
 
@@ -307,57 +303,187 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>MySQL<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/05/service/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hebe Liu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/IMG_0340.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The day we stop looking, is the day we die.">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/05/23/dbbak/" itemprop="url">
-            
-              <span itemprop="name">Automatically Backup Database on Linux - MySQL</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Systemd Unit Configure
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-23T16:17:01+08:00" content="2019-05-23">
-          05-23
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-05 14:22:04" itemprop="dateCreated datePublished" datetime="2019-06-05T14:22:04+08:00">2019-06-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.<br><a id="more"></a></p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /opt/micro_service</span><br><span class="line">cd /opt/micro_service</span><br><span class="line">mkdir logs</span><br><span class="line">vim dump_log.sh</span><br></pre></td></tr></table></figure>
+<h2 id="Log-configure"><a href="#Log-configure" class="headerlink" title="Log configure"></a>Log configure</h2><p><img src="/2019/06/05/service/log.jpg" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Add the execute permission and test it</span><br><span class="line">chmod +x dump_log.sh</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/06/05/service/ls.jpg" alt></p>
+<h2 id="Service-configure"><a href="#Service-configure" class="headerlink" title="Service configure"></a>Service configure</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/systemd/system</span><br><span class="line"># &lt;APP_NAME&gt;.service</span><br><span class="line">vim eureka.service</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/06/05/service/service.jpg" alt></p>
+<h2 id="Activate-service"><a href="#Activate-service" class="headerlink" title="Activate service"></a>Activate service</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Reload all unit files</span><br><span class="line">systemctl daemon-reload</span><br><span class="line"># Enable a service at boot</span><br><span class="line">systemctl enable &lt;APP_NAME&gt;.service</span><br><span class="line">systemctl enable &lt;APP_NAME&gt;.service</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html" target="_blank" rel="noopener">Intro to Systemd</a>    -Ruan Yifeng</li>
+</ul>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Systemd/" rel="tag"># Systemd</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/04/powershell/" rel="next" title="SQL Server 2008 Automatic Backup">
+                <i class="fa fa-chevron-left"></i> SQL Server 2008 Automatic Backup
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -377,8 +503,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -482,6 +617,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Log-configure"><span class="nav-number">2.</span> <span class="nav-text">Log configure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-configure"><span class="nav-number">3.</span> <span class="nav-text">Service configure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activate-service"><span class="nav-number">4.</span> <span class="nav-text">Activate service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -620,6 +772,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
 
   
 
@@ -635,6 +791,8 @@
 
   
 
+
+  
 
 
   
