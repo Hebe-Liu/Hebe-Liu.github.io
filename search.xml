@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Systemd Unit Configure]]></title>
     <url>%2F2019%2F06%2F05%2Fservice%2F</url>
-    <content type="text"><![CDATA[Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd. Prerequisites1234mkdir -p /opt/micro_servicecd /opt/micro_servicemkdir logsvim dump_log.sh Log configure 12# Add the execute permission and test itchmod +x dump_log.sh Service configure123cd /etc/systemd/system# &lt;APP_NAME&gt;.servicevim eureka.service Activate service12345# Reload all unit filessystemctl daemon-reload# Enable a service at bootsystemctl enable &lt;APP_NAME&gt;.servicesystemctl enable &lt;APP_NAME&gt;.service Reference Intro to Systemd -Ruan Yifeng]]></content>
+    <content type="text"><![CDATA[Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd. Prerequisites1234mkdir -p /opt/micro_servicecd /opt/micro_servicemkdir logsvim dump_log.sh Log configure 12# Add the execute permission and test itchmod +x dump_log.sh Service configure123cd /etc/systemd/system# &lt;APP_NAME&gt;.servicevim eureka.service Activate service12345# Reload all unit filessystemctl daemon-reload# Enable a service at bootsystemctl enable &lt;APP_NAME&gt;.servicesystemctl start &lt;APP_NAME&gt;.service Reference Intro to Systemd -Ruan Yifeng]]></content>
       <tags>
         <tag>Systemd</tag>
       </tags>
