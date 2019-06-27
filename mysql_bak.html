@@ -92,23 +92,18 @@
 
 
 
-  <meta name="description" content="Redis Cluster is an active-passive cluster implementation that consists of master and slave nodes. The cluster uses hash partitioning to split the key space into 16,384 key slots, with each master res">
-<meta name="keywords" content="Redis">
+  <meta name="description" content="Backup database by mysqldump + crontab, upload with FTP.">
+<meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Setup A Redis Cluster On Centos 7">
-<meta property="og:url" content="http://hebe.beer/2019/05/19/Redis/index.html">
+<meta property="og:title" content="Automatically backup database on Linux - MySQL">
+<meta property="og:url" content="http://hebe.beer/mysql_bak.html">
 <meta property="og:site_name" content="The day we stop looking, is the day we die.">
-<meta property="og:description" content="Redis Cluster is an active-passive cluster implementation that consists of master and slave nodes. The cluster uses hash partitioning to split the key space into 16,384 key slots, with each master res">
+<meta property="og:description" content="Backup database by mysqldump + crontab, upload with FTP.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hebe.beer/2019/05/19/Redis/firewall.png">
-<meta property="og:image" content="http://hebe.beer/2019/05/19/Redis/ls.png">
-<meta property="og:image" content="http://hebe.beer/2019/05/19/Redis/cluster.png">
-<meta property="og:image" content="http://hebe.beer/2019/05/19/Redis/export.png">
-<meta property="og:updated_time" content="2019-06-06T08:25:55.019Z">
+<meta property="og:updated_time" content="2019-06-27T09:44:59.054Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Setup A Redis Cluster On Centos 7">
-<meta name="twitter:description" content="Redis Cluster is an active-passive cluster implementation that consists of master and slave nodes. The cluster uses hash partitioning to split the key space into 16,384 key slots, with each master res">
-<meta name="twitter:image" content="http://hebe.beer/2019/05/19/Redis/firewall.png">
+<meta name="twitter:title" content="Automatically backup database on Linux - MySQL">
+<meta name="twitter:description" content="Backup database by mysqldump + crontab, upload with FTP.">
 
 
 
@@ -116,7 +111,7 @@
 
   
   
-  <link rel="canonical" href="http://hebe.beer/2019/05/19/Redis/">
+  <link rel="canonical" href="http://hebe.beer/mysql_bak">
 
 
 
@@ -126,7 +121,7 @@
   };
 </script>
 
-  <title>Setup A Redis Cluster On Centos 7 | The day we stop looking, is the day we die.</title>
+  <title>Automatically backup database on Linux - MySQL | The day we stop looking, is the day we die.</title>
   
 
 
@@ -320,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hebe.beer/2019/05/19/Redis/">
+    <link itemprop="mainEntityOfPage" href="http://hebe.beer/mysql_bak.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hebe Liu">
@@ -337,11 +332,11 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Setup A Redis Cluster On Centos 7
+          <h2 class="post-title" itemprop="name headline">Automatically backup database on Linux - MySQL
 
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
@@ -363,7 +358,7 @@
                 
               
 
-              <time title="Created: 2019-05-19 10:47:17" itemprop="dateCreated datePublished" datetime="2019-05-19T10:47:17+08:00">2019-05-19</time>
+              <time title="Created: 2019-05-23 16:17:01" itemprop="dateCreated datePublished" datetime="2019-05-23T16:17:01+08:00">2019-05-23</time>
             
 
             
@@ -405,34 +400,15 @@
       
 
       
-        <p>Redis Cluster is an active-passive cluster implementation that consists of master and slave nodes. The cluster uses hash partitioning to split the key space into 16,384 key slots, with each master responsible for a subset of those slots.<br>Redis Sentinel monitors the masters and votes to promote slaves when masters die.</p>
-<a id="more"></a>
-<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Tree machines, each of them has one master and one slave.</p>
-<p>172.19.226.208: 6383 6384<br>172.19.226.209: 6385 6385<br>172.19.226.210: 6387 6388</p>
-<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><h3 id="TCP-ports"><a href="#TCP-ports" class="headerlink" title="TCP ports"></a>TCP ports</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --new-zone=redis</span><br><span class="line">firewall-cmd --permanent --zone=redis --add-port=6383/tcp</span><br><span class="line">firewall-cmd --permanent --zone=redis --add-port=16383/tcp</span><br><span class="line">firewall-cmd --permanent --zone=redis --add-source=client_server_private_IP</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/05/19/Redis/firewall.png" alt></p>
-<h3 id="Install-Redis"><a href="#Install-Redis" class="headerlink" title="Install Redis"></a>Install Redis</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-4.0.14.tar.gz</span><br><span class="line">tar -zxvf redis-4.0.14.tar.gz</span><br><span class="line">cd redis-4.0.14</span><br><span class="line">make &amp; make install</span><br></pre></td></tr></table></figure>
-<h3 id="Setup-required-directories"><a href="#Setup-required-directories" class="headerlink" title="Setup required directories"></a>Setup required directories</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cp redis.conf /usr/local/bin</span><br><span class="line">cp sentinel.conf /usr/local/bin</span><br><span class="line">cp src/redis-trib.rb /usr/local/bin</span><br><span class="line">cd /usr/local/bin</span><br><span class="line">mkdir redisdata redislog</span><br><span class="line">cp redis.conf 6383.conf</span><br><span class="line">mv redis.conf 6384.conf</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/05/19/Redis/ls.png" alt></p>
-<h3 id="Config-redis"><a href="#Config-redis" class="headerlink" title="Config redis"></a>Config redis</h3><p>Here is “6383.conf” file. Notice that port and bind values will be different for each node.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># Bind your public/local ip, to let you access by your ip address </span><br><span class="line">bind 172.19.226.208</span><br><span class="line"></span><br><span class="line"># Let clients from other hosts to connect to Redis</span><br><span class="line">protected-mode no</span><br><span class="line"></span><br><span class="line"># Specify redis instance port</span><br><span class="line">port 6383</span><br><span class="line"></span><br><span class="line"># Run as background service</span><br><span class="line">daemonize yes</span><br><span class="line"></span><br><span class="line"># For daemonized pid file path</span><br><span class="line">pidfile /var/run/redis_6383.pid</span><br><span class="line"></span><br><span class="line"># Specify log file path</span><br><span class="line">logfile &quot;/usr/local/bin/redislog/6383.log&quot;</span><br><span class="line"></span><br><span class="line"># Specify db dump path</span><br><span class="line">dbfilename 6383.rdb</span><br><span class="line"></span><br><span class="line"># db will written into this directory</span><br><span class="line">dir /usr/local/bin/redisdata</span><br><span class="line"></span><br><span class="line"># Load data from AOF file</span><br><span class="line">appendonly yes</span><br><span class="line">appendfilename &quot;6383.aof&quot;</span><br><span class="line"></span><br><span class="line"># Enables the cluster mode</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes-6383.conf</span><br><span class="line"></span><br><span class="line"># For it to be considered in failure state</span><br><span class="line">cluster-node-timeout 5000</span><br></pre></td></tr></table></figure></p>
-<h3 id="Start-Redis"><a href="#Start-Redis" class="headerlink" title="Start Redis"></a>Start Redis</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server /usr/local/bin/6383.conf</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/05/19/Redis/cluster.png" alt></p>
-<h3 id="Redis-client"><a href="#Redis-client" class="headerlink" title="Redis client"></a>Redis client</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h 172.19.226.208 -p 6383</span><br><span class="line">&gt;ping</span><br><span class="line">&gt;SHUTDOWN</span><br></pre></td></tr></table></figure>
-<h2 id="Redis-Cluster"><a href="#Redis-Cluster" class="headerlink" title="Redis Cluster"></a>Redis Cluster</h2><h3 id="Install-Ruby"><a href="#Install-Ruby" class="headerlink" title="Install Ruby"></a>Install Ruby</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install centos-release-scl-rh</span><br><span class="line">yum install rh-ruby25 -y</span><br><span class="line">scl enable rh-ruby25 bash</span><br><span class="line">ruby -v</span><br><span class="line">gem install redis</span><br></pre></td></tr></table></figure>
-<h3 id="Set-environment-variables"><a href="#Set-environment-variables" class="headerlink" title="Set environment variables"></a>Set environment variables</h3><p>Adding the output of command “export” to the bottom of /etc/profile.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export</span><br><span class="line">vim /etc/profile</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
-<p><img src="/2019/05/19/Redis/export.png" alt="/etc/profile"></p>
-<h3 id="Creating-the-cluster"><a href="#Creating-the-cluster" class="headerlink" title="Creating the cluster"></a>Creating the cluster</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-trib.rb create --replicas 1 172.19.226.208:6383 172.19.226.209:7003 172.19.226.210:7005 172.19.226.208:6384 172.19.226.209:7004 172.19.226.210:7006</span><br></pre></td></tr></table></figure>
-<h2 id="Redis-Sentinel"><a href="#Redis-Sentinel" class="headerlink" title="Redis Sentinel"></a>Redis Sentinel</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv sentinel.conf 26383.conf</span><br><span class="line">vim 26383.conf</span><br></pre></td></tr></table></figure>
-<h3 id="Config-sentinel"><a href="#Config-sentinel" class="headerlink" title="Config sentinel"></a>Config sentinel</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">port 26383</span><br><span class="line">sentinel monitor mymaster 172.19.226.208 6383 2</span><br></pre></td></tr></table></figure>
-<h3 id="Start-sentinel"><a href="#Start-sentinel" class="headerlink" title="Start sentinel"></a>Start sentinel</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-sentinel /usr/local/bin/26383.conf &amp;</span><br></pre></td></tr></table></figure>
-<h2 id="ERROR"><a href="#ERROR" class="headerlink" title="ERROR"></a>ERROR</h2><ol>
-<li>[ERR] Node 172.19.226.208:6383 is not empty. Either the node already knows other nodes (check with CLUSTER NODES) or contains some key in database 0.</li>
-</ol>
-<p>To wipe the node clean:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd redisdata</span><br><span class="line">rm -f *</span><br><span class="line">redis-cli -h 172.19.226.208 -p 6383</span><br><span class="line">&gt;flushall</span><br><span class="line">&gt;cluster reset</span><br><span class="line">&gt;exit</span><br></pre></td></tr></table></figure></p>
-<ol start="2">
-<li>Waiting for the cluster to join…..</li>
-</ol>
-<p>Make sure that not just the TCP listening port for the clients, but also the Cluster Bus port, is open. The Cluster bus port is always the Redis base port + 10000.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --zone=redis--add-port=16383/tcp</span><br><span class="line">firewall-cmd --permanent --zone=redis--add-port=16384/tcp</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure></p>
+        <p>Backup database by mysqldump + crontab, upload with FTP.<br><a id="more"></a></p>
+<h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="Setup-required-directories"><a href="#Setup-required-directories" class="headerlink" title="Setup required directories"></a>Setup required directories</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">mkdir backups</span><br><span class="line">cd backups</span><br><span class="line">mkdir data</span><br><span class="line"></span><br><span class="line">vim auto_backup.sh</span><br></pre></td></tr></table></figure>
+<h3 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">date_str=$(date +%Y%m%d)</span><br><span class="line">cd ~/backups/data</span><br><span class="line"></span><br><span class="line"># Delete files older than 10 days</span><br><span class="line">find * -mtime +10 -exec rm \&#123;&#125; \; </span><br><span class="line"></span><br><span class="line"># Backup MySQL db, Change root/123456 into your own settings</span><br><span class="line">mysqldump -u root --password=123456 dbname &gt; backup_$date_str.sql</span><br><span class="line"></span><br><span class="line">echo backup_$date_str.sql OK</span><br><span class="line"></span><br><span class="line"># Upload files using FTP</span><br><span class="line">ftp -n&lt;&lt;!</span><br><span class="line">open 172.19.227.9</span><br><span class="line">user root 123456</span><br><span class="line">binary</span><br><span class="line">prompt</span><br><span class="line">mput *date_str*</span><br><span class="line">close</span><br><span class="line">bye</span><br><span class="line">!</span><br></pre></td></tr></table></figure>
+<p>Add the execute permission and test it<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x auto_backup.sh</span><br><span class="line">./auto_backup.sh</span><br></pre></td></tr></table></figure></p>
+<h2 id="Crontab"><a href="#Crontab" class="headerlink" title="Crontab"></a>Crontab</h2><h3 id="Check-if-cron-is-running"><a href="#Check-if-cron-is-running" class="headerlink" title="Check if cron is running"></a>Check if cron is running</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service cron status</span><br><span class="line"># Or</span><br><span class="line">service crond status</span><br></pre></td></tr></table></figure>
+<h3 id="Add-job-to-cron"><a href="#Add-job-to-cron" class="headerlink" title="Add job to cron"></a>Add job to cron</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim auto_backup.cron</span><br></pre></td></tr></table></figure>
+<h3 id="Config-1"><a href="#Config-1" class="headerlink" title="Config"></a>Config</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Minute(0-59) Hour(0-23) Day of Month(1-31) Month(1-12 or Jan-Dec) Day of Week(0-6 or Sun-Sat) Command</span><br><span class="line"># This line executes the &quot;auto_backup.sh&quot; at 5AM everyday</span><br><span class="line">0 5 * * * ~/backups/auto_backup.sh</span><br></pre></td></tr></table></figure>
+<h3 id="Restart-service"><a href="#Restart-service" class="headerlink" title="Restart service"></a>Restart service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service cron restart</span><br></pre></td></tr></table></figure>
+<h3 id="Other-crontab-options"><a href="#Other-crontab-options" class="headerlink" title="Other crontab options"></a>Other crontab options</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Display the current crontab</span><br><span class="line">crontab -l</span><br><span class="line"># Remove the current crontab</span><br><span class="line">crontab -r</span><br><span class="line"># Edit the current crontab</span><br><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -456,7 +432,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Redis/" rel="tag"># Redis</a>
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
           
         </div>
       
@@ -469,14 +445,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/redis.html" rel="next" title="Setup a Redis Cluster on Centos 7">
+                <i class="fa fa-chevron-left"></i> Setup a Redis Cluster on Centos 7
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/23/dbbak/" rel="prev" title="Automatically Backup Database on Linux - MySQL">
-                Automatically Backup Database on Linux - MySQL <i class="fa fa-chevron-right"></i>
+              <a href="/oracle_bak.html" rel="prev" title="Automatically backup database on Linux - Oracle">
+                Automatically backup database on Linux - Oracle <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -648,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis"><span class="nav-number">2.</span> <span class="nav-text">Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-ports"><span class="nav-number">2.1.</span> <span class="nav-text">TCP ports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Redis"><span class="nav-number">2.2.</span> <span class="nav-text">Install Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup-required-directories"><span class="nav-number">2.3.</span> <span class="nav-text">Setup required directories</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-redis"><span class="nav-number">2.4.</span> <span class="nav-text">Config redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Start-Redis"><span class="nav-number">2.5.</span> <span class="nav-text">Start Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-client"><span class="nav-number">2.6.</span> <span class="nav-text">Redis client</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-Cluster"><span class="nav-number">3.</span> <span class="nav-text">Redis Cluster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Ruby"><span class="nav-number">3.1.</span> <span class="nav-text">Install Ruby</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-environment-variables"><span class="nav-number">3.2.</span> <span class="nav-text">Set environment variables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-the-cluster"><span class="nav-number">3.3.</span> <span class="nav-text">Creating the cluster</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-Sentinel"><span class="nav-number">4.</span> <span class="nav-text">Redis Sentinel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-sentinel"><span class="nav-number">4.1.</span> <span class="nav-text">Config sentinel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Start-sentinel"><span class="nav-number">4.2.</span> <span class="nav-text">Start sentinel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ERROR"><span class="nav-number">5.</span> <span class="nav-text">ERROR</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL"><span class="nav-number">1.</span> <span class="nav-text">MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup-required-directories"><span class="nav-number">1.1.</span> <span class="nav-text">Setup required directories</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crontab"><span class="nav-number">2.</span> <span class="nav-text">Crontab</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Check-if-cron-is-running"><span class="nav-number">2.1.</span> <span class="nav-text">Check if cron is running</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-job-to-cron"><span class="nav-number">2.2.</span> <span class="nav-text">Add job to cron</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-1"><span class="nav-number">2.3.</span> <span class="nav-text">Config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Restart-service"><span class="nav-number">2.4.</span> <span class="nav-text">Restart service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-crontab-options"><span class="nav-number">2.5.</span> <span class="nav-text">Other crontab options</span></a></li></ol></li></ol></div>
             
 
           </div>

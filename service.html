@@ -92,18 +92,22 @@
 
 
 
-  <meta name="description" content="Backup ORACLE database by crontab , mount a Windows share.">
-<meta name="keywords" content="Oracle">
+  <meta name="description" content="Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.">
+<meta name="keywords" content="Systemd">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Automatically Backup Database on Linux - ORACLE">
-<meta property="og:url" content="http://hebe.beer/2019/05/31/oracle-bak/index.html">
+<meta property="og:title" content="Systemd unit configuration">
+<meta property="og:url" content="http://hebe.beer/service.html">
 <meta property="og:site_name" content="The day we stop looking, is the day we die.">
-<meta property="og:description" content="Backup ORACLE database by crontab , mount a Windows share.">
+<meta property="og:description" content="Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-06T08:27:01.814Z">
+<meta property="og:image" content="http://hebe.beer/service/log.jpg">
+<meta property="og:image" content="http://hebe.beer/service/ls.jpg">
+<meta property="og:image" content="http://hebe.beer/service/service.jpg">
+<meta property="og:updated_time" content="2019-06-27T09:41:26.707Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Automatically Backup Database on Linux - ORACLE">
-<meta name="twitter:description" content="Backup ORACLE database by crontab , mount a Windows share.">
+<meta name="twitter:title" content="Systemd unit configuration">
+<meta name="twitter:description" content="Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.">
+<meta name="twitter:image" content="http://hebe.beer/service/log.jpg">
 
 
 
@@ -111,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://hebe.beer/2019/05/31/oracle-bak/">
+  <link rel="canonical" href="http://hebe.beer/service">
 
 
 
@@ -121,7 +125,7 @@
   };
 </script>
 
-  <title>Automatically Backup Database on Linux - ORACLE | The day we stop looking, is the day we die.</title>
+  <title>Systemd unit configuration | The day we stop looking, is the day we die.</title>
   
 
 
@@ -315,7 +319,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hebe.beer/2019/05/31/oracle-bak/">
+    <link itemprop="mainEntityOfPage" href="http://hebe.beer/service.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hebe Liu">
@@ -332,11 +336,11 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Automatically Backup Database on Linux - ORACLE
+          <h2 class="post-title" itemprop="name headline">Systemd unit configuration
 
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
@@ -358,7 +362,7 @@
                 
               
 
-              <time title="Created: 2019-05-31 16:06:21" itemprop="dateCreated datePublished" datetime="2019-05-31T16:06:21+08:00">2019-05-31</time>
+              <time title="Created: 2019-06-05 14:22:04" itemprop="dateCreated datePublished" datetime="2019-06-05T14:22:04+08:00">2019-06-05</time>
             
 
             
@@ -400,17 +404,17 @@
       
 
       
-        <p>Backup ORACLE database by crontab , mount a Windows share.<br><a id="more"></a></p>
-<h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Add a link</span><br><span class="line">cd /home/oracle</span><br><span class="line">mkdir dbbak</span><br><span class="line">mount -t cifs  -o username=root,password=123456,rw,dir_mode=0777,file_mode=0777  //172.19.227.9/dbbak$ /home/oracle/dbbak/</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Switch to the user oracle</span><br><span class="line">su - oracle</span><br><span class="line"># The location of database</span><br><span class="line">cd /oracle/product/11.2.0/db_1/bin/</span><br><span class="line">vim auto_backup.sh</span><br></pre></td></tr></table></figure>
-<h3 id="Config-backup"><a href="#Config-backup" class="headerlink" title="Config backup"></a>Config backup</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">date_str=$(date +%Y%m%d)</span><br><span class="line"></span><br><span class="line">source /home/oracle/.bash_profile</span><br><span class="line"></span><br><span class="line"># Delete files older than 7 days</span><br><span class="line">find /home/oracle/dbbak/* -mtime +7 -exec rm \&#123;&#125; \;</span><br><span class="line"></span><br><span class="line"># Change root/123456 into your own settings</span><br><span class="line">/oracle/product/11.2.0/db_1/bin/exp \</span><br><span class="line">        root/123456 \</span><br><span class="line">        owner=root \</span><br><span class="line">        file=/home/oracle/dbbak/BACKUP_$date_str.dmp \</span><br><span class="line">        log=/home/oracle/dbbak/BACKUP_$date_str.log</span><br><span class="line"></span><br><span class="line">echo backup_$date_str.sql OK</span><br></pre></td></tr></table></figure>
-<h3 id="Config-source"><a href="#Config-source" class="headerlink" title="Config source"></a>Config source</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /home/oracle/.bash_profile</span><br></pre></td></tr></table></figure>
-<p>User specific environment and startup programs<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:$HOME/.local/bin:$HOME/bin</span><br><span class="line">export PATH</span><br><span class="line">export NLS_LANG=american_america.UTF8</span><br><span class="line"># The location of database installed</span><br><span class="line">export ORACLE_BASE=/oracle</span><br><span class="line"># The location of database     </span><br><span class="line">export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/db_1 </span><br><span class="line"># INSTANCE_NAME</span><br><span class="line">export ORACLE_SID=orcl  </span><br><span class="line">export ORACLE_UNQNAME=$ORACLE_SID</span><br><span class="line"># Set environment variables</span><br><span class="line">export PATH=$ORACLE_HOME/bin:/user/sbin:$PATH</span><br><span class="line">export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure></p>
-<p>Add the execute permission and test it<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x auto_backup.sh</span><br><span class="line">./auto_backup.sh</span><br></pre></td></tr></table></figure></p>
-<p>Check if cron is running<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service cron status</span><br><span class="line"># Or</span><br><span class="line">service crond status</span><br></pre></td></tr></table></figure></p>
-<h3 id="Add-job-to-cron"><a href="#Add-job-to-cron" class="headerlink" title="Add job to cron"></a>Add job to cron</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/oracle</span><br><span class="line">vim auto_backup.cron</span><br></pre></td></tr></table></figure>
-<h3 id="Config-crontab"><a href="#Config-crontab" class="headerlink" title="Config crontab"></a>Config crontab</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Minute(0-59) Hour(0-23) Day of Month(1-31) Month(1-12 or Jan-Dec) Day of Week(0-6 or Sun-Sat) Command</span><br><span class="line"># This line executes the &quot;auto_backup.sh&quot; at 1AM from Sunday to Friday</span><br><span class="line">0 1 * * 1,2,3,4,5  /oracle/product/11.2.0/db_1/bin/auto_backup.sh</span><br></pre></td></tr></table></figure>
-<h3 id="Restart-service"><a href="#Restart-service" class="headerlink" title="Restart service"></a>Restart service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service cron restart</span><br></pre></td></tr></table></figure>
+        <p>Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.<br><a id="more"></a></p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /opt/micro_service</span><br><span class="line">cd /opt/micro_service</span><br><span class="line">mkdir logs</span><br><span class="line">vim dump_log.sh</span><br></pre></td></tr></table></figure>
+<h2 id="Config-logs"><a href="#Config-logs" class="headerlink" title="Config logs"></a>Config logs</h2><p><img src="/service/log.jpg" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Add the execute permission and test it</span><br><span class="line">chmod +x dump_log.sh</span><br></pre></td></tr></table></figure>
+<p><img src="/service/ls.jpg" alt></p>
+<h2 id="Config-service"><a href="#Config-service" class="headerlink" title="Config service"></a>Config service</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/systemd/system</span><br><span class="line"># &lt;APP_NAME&gt;.service</span><br><span class="line">vim eureka.service</span><br></pre></td></tr></table></figure>
+<p><img src="/service/service.jpg" alt></p>
+<h2 id="Activate-service"><a href="#Activate-service" class="headerlink" title="Activate service"></a>Activate service</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Reload all unit files</span><br><span class="line">systemctl daemon-reload</span><br><span class="line"># Enable a service at boot</span><br><span class="line">systemctl enable &lt;APP_NAME&gt;.service</span><br><span class="line">systemctl start &lt;APP_NAME&gt;.service</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html" target="_blank" rel="noopener">Intro to Systemd</a>    -Ruan Yifeng</li>
+</ul>
 
       
     </div>
@@ -434,7 +438,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Oracle/" rel="tag"># Oracle</a>
+            <a href="/tags/Systemd/" rel="tag"># Systemd</a>
           
         </div>
       
@@ -447,8 +451,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/23/dbbak/" rel="next" title="Automatically Backup Database on Linux - MySQL">
-                <i class="fa fa-chevron-left"></i> Automatically Backup Database on Linux - MySQL
+              <a href="/powershell.html" rel="next" title="SQL Server 2008 automatic backup">
+                <i class="fa fa-chevron-left"></i> SQL Server 2008 automatic backup
               </a>
             
           </div>
@@ -456,10 +460,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/04/powershell/" rel="prev" title="SQL Server 2008 Automatic Backup">
-                SQL Server 2008 Automatic Backup <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -630,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-backup"><span class="nav-number">2.</span> <span class="nav-text">Config backup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-source"><span class="nav-number">3.</span> <span class="nav-text">Config source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-job-to-cron"><span class="nav-number">4.</span> <span class="nav-text">Add job to cron</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-crontab"><span class="nav-number">5.</span> <span class="nav-text">Config crontab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Restart-service"><span class="nav-number">6.</span> <span class="nav-text">Restart service</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-logs"><span class="nav-number">2.</span> <span class="nav-text">Config logs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-service"><span class="nav-number">3.</span> <span class="nav-text">Config service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activate-service"><span class="nav-number">4.</span> <span class="nav-text">Activate service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
