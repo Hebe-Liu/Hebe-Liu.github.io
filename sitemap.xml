@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://hebe.beer/redis.html</loc>
+    
+    <lastmod>2019-07-04T07:59:51.721Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://hebe.beer/mysql_bak.html</loc>
     
     <lastmod>2019-06-27T09:44:59.054Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://hebe.beer/oracle_bak.html</loc>
     
     <lastmod>2019-06-27T09:42:54.230Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://hebe.beer/redis.html</loc>
-    
-    <lastmod>2019-06-27T09:41:55.715Z</lastmod>
     
   </url>
   

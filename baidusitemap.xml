@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://hebe.beer/redis.html</loc>
+    <lastmod>2019-07-04</lastmod>
+  </url>  <url>
     <loc>http://hebe.beer/mysql_bak.html</loc>
     <lastmod>2019-06-27</lastmod>
   </url>  <url>
     <loc>http://hebe.beer/oracle_bak.html</loc>
-    <lastmod>2019-06-27</lastmod>
-  </url>  <url>
-    <loc>http://hebe.beer/redis.html</loc>
     <lastmod>2019-06-27</lastmod>
   </url>  <url>
     <loc>http://hebe.beer/service.html</loc>

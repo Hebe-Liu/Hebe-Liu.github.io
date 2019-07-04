@@ -100,15 +100,15 @@
 <meta property="og:site_name" content="The day we stop looking, is the day we die.">
 <meta property="og:description" content="Redis Cluster is an active-passive cluster implementation that consists of master and slave nodes. The cluster uses hash partitioning to split the key space into 16,384 key slots, with each master res">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hebe.beer/Redis/firewall.png">
+<meta property="og:image" content="http://hebe.beer/Redis/firewalld.png">
 <meta property="og:image" content="http://hebe.beer/Redis/ls.png">
 <meta property="og:image" content="http://hebe.beer/Redis/cluster.png">
 <meta property="og:image" content="http://hebe.beer/Redis/export.png">
-<meta property="og:updated_time" content="2019-06-27T09:41:55.715Z">
+<meta property="og:updated_time" content="2019-07-04T07:59:51.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Setup a Redis Cluster on Centos 7">
 <meta name="twitter:description" content="Redis Cluster is an active-passive cluster implementation that consists of master and slave nodes. The cluster uses hash partitioning to split the key space into 16,384 key slots, with each master res">
-<meta name="twitter:image" content="http://hebe.beer/Redis/firewall.png">
+<meta name="twitter:image" content="http://hebe.beer/Redis/firewalld.png">
 
 
 
@@ -410,7 +410,7 @@
 <h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Tree machines, each of them has one master and one slave.</p>
 <p>172.19.226.208: 6383 6384<br>172.19.226.209: 6385 6385<br>172.19.226.210: 6387 6388</p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><h3 id="TCP-ports"><a href="#TCP-ports" class="headerlink" title="TCP ports"></a>TCP ports</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --new-zone=redis</span><br><span class="line">firewall-cmd --permanent --zone=redis --add-port=6383/tcp</span><br><span class="line">firewall-cmd --permanent --zone=redis --add-port=16383/tcp</span><br><span class="line">firewall-cmd --permanent --zone=redis --add-source=client_server_private_IP</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-<p><img src="/Redis/firewall.png" alt></p>
+<p><img src="/Redis/firewalld.png" alt></p>
 <h3 id="Install-Redis"><a href="#Install-Redis" class="headerlink" title="Install Redis"></a>Install Redis</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-4.0.14.tar.gz</span><br><span class="line">tar -zxvf redis-4.0.14.tar.gz</span><br><span class="line">cd redis-4.0.14</span><br><span class="line">make &amp; make install</span><br></pre></td></tr></table></figure>
 <h3 id="Setup-required-directories"><a href="#Setup-required-directories" class="headerlink" title="Setup required directories"></a>Setup required directories</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cp redis.conf /usr/local/bin</span><br><span class="line">cp sentinel.conf /usr/local/bin</span><br><span class="line">cp src/redis-trib.rb /usr/local/bin</span><br><span class="line">cd /usr/local/bin</span><br><span class="line">mkdir redisdata redislog</span><br><span class="line">cp redis.conf 6383.conf</span><br><span class="line">mv redis.conf 6384.conf</span><br></pre></td></tr></table></figure>
 <p><img src="/Redis/ls.png" alt></p>
