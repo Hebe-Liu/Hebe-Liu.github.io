@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="The day we stop looking, is the day we die.">
 <meta property="og:description" content="Version: MongoDB 4.0.0">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-10T07:27:30.869Z">
+<meta property="og:updated_time" content="2019-07-10T07:43:56.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Install MongoDB on CentOS 7">
 <meta name="twitter:description" content="Version: MongoDB 4.0.0">
@@ -401,12 +401,25 @@
 
       
         <p>Version: MongoDB 4.0.0<br><a id="more"></a></p>
-<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Download the installation package and extract tgz<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.0.tgz</span><br><span class="line">tar -zxvf mongodb-linux-x86_64-4.0.0.tgz</span><br></pre></td></tr></table></figure></p>
-<p>Copy the unpacked package to the specified directory<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv mongodb-linux-x86_64-4.0.0 /usr/local/mongodb</span><br></pre></td></tr></table></figure></p>
-<p>Add the MongoDB executable to your PATH<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/usr/local/mongodb/bin:$PATH</span><br></pre></td></tr></table></figure></p>
-<p>Create a database directory<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/mongodata</span><br></pre></td></tr></table></figure></p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Download the installation package and extract tgz</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.0.tgz</span><br><span class="line">tar -zxvf mongodb-linux-x86_64-4.0.0.tgz</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>Copy the unpacked package to the specified directory</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv mongodb-linux-x86_64-4.0.0 /usr/local/mongodb</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>Add the MongoDB executable to your PATH</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/usr/local/mongodb/bin:$PATH</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>Create a database directory</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/mongodata</span><br></pre></td></tr></table></figure>
+</blockquote>
 <h2 id="Run-the-MongoDB-service"><a href="#Run-the-MongoDB-service" class="headerlink" title="Run the MongoDB service"></a>Run the MongoDB service</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath=/data/mongodata --logpath=/data/mongodata/mongo.log &amp;</span><br></pre></td></tr></table></figure>
 <h2 id="The-mongo-Shell"><a href="#The-mongo-Shell" class="headerlink" title="The mongo Shell"></a>The mongo Shell</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br><span class="line">&gt;use dbname</span><br><span class="line">&gt;load(&quot;/data/xxx.js&quot;)</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
