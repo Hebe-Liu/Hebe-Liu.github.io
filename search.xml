@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Install MongoDB on CentOS 7]]></title>
     <url>%2Fmongo.html</url>
-    <content type="text"><![CDATA[Version: MongoDB 4.0.0 PrerequisitesDownload the installation package and extract tgz12curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.0.tgztar -zxvf mongodb-linux-x86_64-4.0.0.tgz Copy the unpacked package to the specified directory1mv mongodb-linux-x86_64-4.0.0 /usr/local/mongodb Add the MongoDB executable to your PATH1export PATH=/usr/local/mongodb/bin:$PATH Create a database directory1mkdir -p /data/mongodata Run the MongoDB service1mongod --dbpath=/data/mongodata --logpath=/data/mongodata/mongo.log &amp; The mongo Shell123mongo&gt;use dbnameload(&quot;/data/xxx.js&quot;)]]></content>
+    <content type="text"><![CDATA[Version: MongoDB 4.0.0 PrerequisitesDownload the installation package and extract tgz12curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.0.tgztar -zxvf mongodb-linux-x86_64-4.0.0.tgz Copy the unpacked package to the specified directory1mv mongodb-linux-x86_64-4.0.0 /usr/local/mongodb Add the MongoDB executable to your PATH1export PATH=/usr/local/mongodb/bin:$PATH Create a database directory1mkdir -p /data/mongodata Run the MongoDB service1mongod --dbpath=/data/mongodata --logpath=/data/mongodata/mongo.log &amp; The mongo Shell123mongo&gt;use dbname&gt;load(&quot;/data/xxx.js&quot;)]]></content>
       <tags>
         <tag>MongoDB</tag>
       </tags>
