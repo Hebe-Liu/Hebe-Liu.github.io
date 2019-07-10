@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Install MongoDB on Linux]]></title>
+    <url>%2Fmongo.html</url>
+    <content type="text"><![CDATA[PrerequisitesDownload the installation package and extract tgz12curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.0.tgztar -zxvf mongodb-linux-x86_64-4.0.0.tgz Copy the unpacked package to the specified directory1mv mongodb-linux-x86_64-4.0.0 /usr/local/mongodb Add the MongoDB executable to your PATH1export PATH=/usr/local/mongodb/bin:$PATH Create a database directory1mkdir -p /data/mongodata Run the MongoDB service1mongod --dbpath=/data/mongodata --logpath=/data/mongodata/mongo.log &amp; The mongo Shell123mongo&gt;use dbnameload(&quot;/data/xxx.js&quot;)]]></content>
+      <tags>
+        <tag>MongoDB</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Systemd unit configuration]]></title>
     <url>%2Fservice.html</url>
     <content type="text"><![CDATA[Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd. Prerequisites1234mkdir -p /opt/micro_servicecd /opt/micro_servicemkdir logsvim dump_log.sh Config logs 12# Add the execute permission and test itchmod +x dump_log.sh Config service123cd /etc/systemd/system# &lt;APP_NAME&gt;.servicevim eureka.service Activate service12345# Reload all unit filessystemctl daemon-reload# Enable a service at bootsystemctl enable &lt;APP_NAME&gt;.servicesystemctl start &lt;APP_NAME&gt;.service Reference Intro to Systemd -Ruan Yifeng]]></content>
