@@ -92,22 +92,18 @@
 
 
 
-  <meta name="description" content="Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.">
-<meta name="keywords" content="Systemd">
+  <meta name="description" content="Add an additional disk drive to the system without affecting the operation, using fdisk and partporbe command.">
+<meta name="keywords" content="Disk">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Systemd unit configuration">
-<meta property="og:url" content="http://hebe.beer/service.html">
+<meta property="og:title" content="Add an Additional Disk Drive to Your Linux">
+<meta property="og:url" content="http://hebe.beer/fdisk.html">
 <meta property="og:site_name" content="The day we stop looking, is the day we die.">
-<meta property="og:description" content="Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.">
+<meta property="og:description" content="Add an additional disk drive to the system without affecting the operation, using fdisk and partporbe command.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hebe.beer/service/log.jpg">
-<meta property="og:image" content="http://hebe.beer/service/ls.jpg">
-<meta property="og:image" content="http://hebe.beer/service/service.jpg">
-<meta property="og:updated_time" content="2019-06-27T09:41:26.707Z">
+<meta property="og:updated_time" content="2019-09-26T06:12:21.790Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Systemd unit configuration">
-<meta name="twitter:description" content="Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.">
-<meta name="twitter:image" content="http://hebe.beer/service/log.jpg">
+<meta name="twitter:title" content="Add an Additional Disk Drive to Your Linux">
+<meta name="twitter:description" content="Add an additional disk drive to the system without affecting the operation, using fdisk and partporbe command.">
 
 
 
@@ -115,7 +111,7 @@
 
   
   
-  <link rel="canonical" href="http://hebe.beer/service">
+  <link rel="canonical" href="http://hebe.beer/fdisk">
 
 
 
@@ -125,7 +121,7 @@
   };
 </script>
 
-  <title>Systemd unit configuration | The day we stop looking, is the day we die.</title>
+  <title>Add an Additional Disk Drive to Your Linux | The day we stop looking, is the day we die.</title>
   
 
 
@@ -319,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hebe.beer/service.html">
+    <link itemprop="mainEntityOfPage" href="http://hebe.beer/fdisk.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hebe Liu">
@@ -336,7 +332,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Systemd unit configuration
+          <h2 class="post-title" itemprop="name headline">Add an Additional Disk Drive to Your Linux
 
               
             
@@ -362,7 +358,7 @@
                 
               
 
-              <time title="Created: 2019-06-05 14:22:04" itemprop="dateCreated datePublished" datetime="2019-06-05T14:22:04+08:00">2019-06-05</time>
+              <time title="Created: 2019-09-12 14:45:22" itemprop="dateCreated datePublished" datetime="2019-09-12T14:45:22+08:00">2019-09-12</time>
             
 
             
@@ -404,17 +400,15 @@
       
 
       
-        <p>Systemctl is a controlling interface and inspection tool for the widely-adopted init system and service manager systemd.<br><a id="more"></a></p>
-<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /opt/micro_service</span><br><span class="line">cd /opt/micro_service</span><br><span class="line">mkdir logs</span><br><span class="line">vim dump_log.sh</span><br></pre></td></tr></table></figure>
-<h2 id="Config-logs"><a href="#Config-logs" class="headerlink" title="Config logs"></a>Config logs</h2><p><img src="/service/log.jpg" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Add the execute permission and test it</span><br><span class="line">chmod +x dump_log.sh</span><br></pre></td></tr></table></figure>
-<p><img src="/service/ls.jpg" alt></p>
-<h2 id="Config-service"><a href="#Config-service" class="headerlink" title="Config service"></a>Config service</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/systemd/system</span><br><span class="line"># &lt;APP_NAME&gt;.service</span><br><span class="line">vim eureka.service</span><br></pre></td></tr></table></figure>
-<p><img src="/service/service.jpg" alt></p>
-<h2 id="Activate-service"><a href="#Activate-service" class="headerlink" title="Activate service"></a>Activate service</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Reload all unit files</span><br><span class="line">systemctl daemon-reload</span><br><span class="line"># Enable a service at boot</span><br><span class="line">systemctl enable &lt;APP_NAME&gt;.service</span><br><span class="line">systemctl start &lt;APP_NAME&gt;.service</span><br></pre></td></tr></table></figure>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html" target="_blank" rel="noopener">Intro to Systemd</a>    -Ruan Yifeng</li>
-</ul>
+        <p>Add an additional disk drive to the system without affecting the operation, using fdisk and partporbe command.<br><a id="more"></a></p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Please make sure that the hard drive was physically added to your system.</p>
+<p>List all the disks available with the system.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure></p>
+<h2 id="Create-a-primary-partition"><a href="#Create-a-primary-partition" class="headerlink" title="Create a primary partition"></a>Create a primary partition</h2><p>First format the drive using fdisk utility.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sdc</span><br></pre></td></tr></table></figure></p>
+<p>Proceed with these option:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n # add a new partition</span><br><span class="line">p # primary</span><br><span class="line">1 # choose default 1 for partition number</span><br><span class="line">w # write table to disk and exit</span><br></pre></td></tr></table></figure></p>
+<p>Informs the operating system kernel of partition table changes<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partprobe /dev/sdc</span><br></pre></td></tr></table></figure></p>
+<p>Format our new partition with ext4 filesystem<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs -t ext4 /dev/sdc1</span><br></pre></td></tr></table></figure></p>
+<h2 id="Mount-it-up"><a href="#Mount-it-up" class="headerlink" title="Mount it up"></a>Mount it up</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/mount_dir</span><br><span class="line">mount /dev/sdc1 /mnt/mount_dir</span><br></pre></td></tr></table></figure>
+<p>Edit /etc/fstab to enter the drive into the fstab file so that it is recognized and mounted upon system boot.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/dev/sdc1 /mnt/mount_dir ext4 defaults 0 0</span><br><span class="line"># The digits refer to whether the mount should be backed up &amp; the order in which &quot;fsck&quot; check the mount points</span><br><span class="line"># (0=no)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -438,7 +432,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Systemd/" rel="tag"># Systemd</a>
+            <a href="/tags/Disk/" rel="tag"># Disk</a>
           
         </div>
       
@@ -451,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/powershell.html" rel="next" title="SQL Server 2008 automatic backup">
-                <i class="fa fa-chevron-left"></i> SQL Server 2008 automatic backup
+              <a href="/mongo.html" rel="next" title="Install MongoDB on CentOS 7">
+                <i class="fa fa-chevron-left"></i> Install MongoDB on CentOS 7
               </a>
             
           </div>
@@ -460,10 +454,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/mongo.html" rel="prev" title="Install MongoDB on CentOS 7">
-                Install MongoDB on CentOS 7 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -638,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-logs"><span class="nav-number">2.</span> <span class="nav-text">Config logs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-service"><span class="nav-number">3.</span> <span class="nav-text">Config service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activate-service"><span class="nav-number">4.</span> <span class="nav-text">Activate service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-a-primary-partition"><span class="nav-number">2.</span> <span class="nav-text">Create a primary partition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mount-it-up"><span class="nav-number">3.</span> <span class="nav-text">Mount it up</span></a></li></ol></div>
             
 
           </div>
