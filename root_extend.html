@@ -92,13 +92,26 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="The day we stop looking, is the day we die.">
-<meta property="og:url" content="http://hebe.beer/tags/SQL-Server/index.html">
+  <meta name="description" content="I’m using the CentOS 7 that has xfs partition cantos-root mounted as /. It’s almost running out of space so I added a new drive with 50GB space to volume group and then extend cantos-root.">
+<meta name="keywords" content="Disk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Increasing the size of a root partition using LVM">
+<meta property="og:url" content="http://hebe.beer/root_extend.html">
 <meta property="og:site_name" content="The day we stop looking, is the day we die.">
+<meta property="og:description" content="I’m using the CentOS 7 that has xfs partition cantos-root mounted as /. It’s almost running out of space so I added a new drive with 50GB space to volume group and then extend cantos-root.">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://hebe.beer/root_extend/fdisk.png">
+<meta property="og:image" content="http://hebe.beer/root_extend/new-partition.png">
+<meta property="og:image" content="http://hebe.beer/root_extend/pv.png">
+<meta property="og:image" content="http://hebe.beer/root_extend/vg-extend.png">
+<meta property="og:image" content="http://hebe.beer/root_extend/lv-extend.png">
+<meta property="og:image" content="http://hebe.beer/root_extend/success.png">
+<meta property="og:image" content="http://hebe.beer/root_extend/df-h.png">
+<meta property="og:updated_time" content="2020-04-02T06:52:28.034Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The day we stop looking, is the day we die.">
+<meta name="twitter:title" content="Increasing the size of a root partition using LVM">
+<meta name="twitter:description" content="I’m using the CentOS 7 that has xfs partition cantos-root mounted as /. It’s almost running out of space so I added a new drive with 50GB space to volume group and then extend cantos-root.">
+<meta name="twitter:image" content="http://hebe.beer/root_extend/fdisk.png">
 
 
 
@@ -106,7 +119,7 @@
 
   
   
-  <link rel="canonical" href="http://hebe.beer/tags/SQL-Server/">
+  <link rel="canonical" href="http://hebe.beer/root_extend">
 
 
 
@@ -116,7 +129,7 @@
   };
 </script>
 
-  <title>Tag: SQL Server | The day we stop looking, is the day we die.</title>
+  <title>Increasing the size of a root partition using LVM | The day we stop looking, is the day we die.</title>
   
 
 
@@ -164,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -219,7 +232,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -248,19 +261,6 @@
 
   
     
-
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 
   
 
@@ -307,57 +307,190 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>SQL Server<small>Tag</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://hebe.beer/root_extend.html">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hebe Liu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/IMG_0340.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The day we stop looking, is the day we die.">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/powershell.html" itemprop="url">
-            
-              <span itemprop="name">SQL Server 2008 automatic backup</span>
-            
-          </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">Increasing the size of a root partition using LVM
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-04T11:09:40+08:00" content="2019-06-04">
-          06-04
-        </time>
-      </div>
+              
+            
+          </h2>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-04-02 14:24:29" itemprop="dateCreated datePublished" datetime="2020-04-02T14:24:29+08:00">2020-04-02</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>I’m using the CentOS 7 that has <strong>xfs</strong> partition cantos-root mounted as /. It’s almost running out of space so I added a new drive with 50GB space to volume group and then extend cantos-root.</p>
+<a id="more"></a>
+<h2 id="Get-the-information-about-newly-added-hard-disk"><a href="#Get-the-information-about-newly-added-hard-disk" class="headerlink" title="Get the information about newly added hard disk"></a>Get the information about newly added hard disk</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
+<p><img src="/root_extend/fdisk.png" alt></p>
+<h2 id="Create-the-partition-and-change-the-partition-type-to-LVM-8e"><a href="#Create-the-partition-and-change-the-partition-type-to-LVM-8e" class="headerlink" title="Create the partition and change the partition type to LVM(8e)"></a>Create the partition and change the partition type to LVM(8e)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sdc</span><br></pre></td></tr></table></figure>
+<p><img src="/root_extend/new-partition.png" alt></p>
+<h2 id="Reload-the-partition-table"><a href="#Reload-the-partition-table" class="headerlink" title="Reload the partition table"></a>Reload the partition table</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partprobe /dev/sdc</span><br></pre></td></tr></table></figure>
+<h2 id="LVM"><a href="#LVM" class="headerlink" title="LVM"></a>LVM</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvm</span><br></pre></td></tr></table></figure>
+<p>Create new PV (Physical Volume)<br><img src="/root_extend/pv.png" alt></p>
+<p>Extend the size of a volume group to get more space for expanding lv.<br><img src="/root_extend/vg-extend.png" alt></p>
+<p>There are 12799 free PE available. So we can use the PE size to extend the logical volume up-to 50GB more.<br><img src="/root_extend/lv-extend.png" alt><br><img src="/root_extend/success.png" alt></p>
+<h2 id="Re-size-the-file-system"><a href="#Re-size-the-file-system" class="headerlink" title="Re-size the file-system"></a>Re-size the file-system</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfs_growfs /dev/mapper/centos-root</span><br></pre></td></tr></table></figure>
+<h2 id="Vertify-disk-size"><a href="#Vertify-disk-size" class="headerlink" title="Vertify disk size"></a>Vertify disk size</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
+<p><img src="/root_extend/df-h.png" alt></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Disk/" rel="tag"># Disk</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/raspberry.html" rel="next" title="Raspberry Pi 4B Headless Setup on Mac">
+                <i class="fa fa-chevron-left"></i> Raspberry Pi 4B Headless Setup on Mac
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -377,8 +510,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -490,6 +632,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Get-the-information-about-newly-added-hard-disk"><span class="nav-number">1.</span> <span class="nav-text">Get the information about newly added hard disk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-the-partition-and-change-the-partition-type-to-LVM-8e"><span class="nav-number">2.</span> <span class="nav-text">Create the partition and change the partition type to LVM(8e)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reload-the-partition-table"><span class="nav-number">3.</span> <span class="nav-text">Reload the partition table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LVM"><span class="nav-number">4.</span> <span class="nav-text">LVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Re-size-the-file-system"><span class="nav-number">5.</span> <span class="nav-text">Re-size the file-system</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vertify-disk-size"><span class="nav-number">6.</span> <span class="nav-text">Vertify disk size</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -628,6 +787,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
 
   
 
@@ -643,6 +806,8 @@
 
   
 
+
+  
 
 
   

@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Increasing the size of a root partition using LVM]]></title>
+    <url>%2Froot_extend.html</url>
+    <content type="text"><![CDATA[I’m using the CentOS 7 that has xfs partition cantos-root mounted as /. It’s almost running out of space so I added a new drive with 50GB space to volume group and then extend cantos-root. Get the information about newly added hard disk1fdisk -l Create the partition and change the partition type to LVM(8e)1fdisk /dev/sdc Reload the partition table1partprobe /dev/sdc LVM1lvm Create new PV (Physical Volume) Extend the size of a volume group to get more space for expanding lv. There are 12799 free PE available. So we can use the PE size to extend the logical volume up-to 50GB more. Re-size the file-system1xfs_growfs /dev/mapper/centos-root Vertify disk size1df -h]]></content>
+      <tags>
+        <tag>Disk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Raspberry Pi 4B Headless Setup on Mac]]></title>
+    <url>%2Fraspberry.html</url>
+    <content type="text"><![CDATA[blahblahblah Things I have Raspberry Pi 4 Model B 16GB MicroSD card Card reader Ethernet cable Power Supply for the Pi StepsDownloading the tools Download Raspbian OS Available at Download, I choosed “Raspbian Buster with desktop”, round 1GB. Download balenaEtcher and install it. Installing the image Connect an SD card reader with the SD card inside. Open balenaEtcher and select from your hard drive the Raspberry Pi .img file you wish to write to the SD card. Select the SD card you wish to write your image to. Review your selections and click ‘Flash!’ to begin writing data to the SD card.]]></content>
+      <tags>
+        <tag>Raspberry</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Add an Additional Disk Drive to Your Linux]]></title>
     <url>%2Ffdisk.html</url>
     <content type="text"><![CDATA[Add an additional disk drive to the system without affecting the operation, using fdisk and partporbe command. PrerequisitesPlease make sure that the hard drive was physically added to your system. List all the disks available with the system.1fdisk -l Create a primary partitionFirst format the drive using fdisk utility.1fdisk /dev/sdc Proceed with these option:1234n # add a new partitionp # primary1 # choose default 1 for partition numberw # write table to disk and exit Informs the operating system kernel of partition table changes1partprobe /dev/sdc Format our new partition with ext4 filesystem1mkfs -t ext4 /dev/sdc1 Mount it up12mkdir /mnt/mount_dirmount /dev/sdc1 /mnt/mount_dir Edit /etc/fstab to enter the drive into the fstab file so that it is recognized and mounted upon system boot.123/dev/sdc1 /mnt/mount_dir ext4 defaults 0 0# The digits refer to whether the mount should be backed up &amp; the order in which &quot;fsck&quot; check the mount points# (0=no) Cross Check1df -h]]></content>
