@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://hebe.beer/mysql_bak.html</loc>
+    <loc>http://hebe.red/mysql_bak.html</loc>
     <lastmod>2020-04-02</lastmod>
   </url>  <url>
-    <loc>http://hebe.beer/root_extend.html</loc>
+    <loc>http://hebe.red/root_extend.html</loc>
     <lastmod>2020-04-02</lastmod>
   </url>  <url>
-    <loc>http://hebe.beer/service.html</loc>
+    <loc>http://hebe.red/service.html</loc>
     <lastmod>2019-10-17</lastmod>
   </url>  <url>
-    <loc>http://hebe.beer/oracle_bak.html</loc>
+    <loc>http://hebe.red/oracle_bak.html</loc>
     <lastmod>2019-09-26</lastmod>
   </url>  <url>
-    <loc>http://hebe.beer/fdisk.html</loc>
+    <loc>http://hebe.red/fdisk.html</loc>
     <lastmod>2019-09-26</lastmod>
   </url>  <url>
-    <loc>http://hebe.beer/mongo.html</loc>
+    <loc>http://hebe.red/mongo.html</loc>
     <lastmod>2019-07-10</lastmod>
   </url>  <url>
-    <loc>http://hebe.beer/redis.html</loc>
+    <loc>http://hebe.red/redis.html</loc>
     <lastmod>2019-07-10</lastmod>
   </url>  <url>
-    <loc>http://hebe.beer/powershell.html</loc>
+    <loc>http://hebe.red/powershell.html</loc>
     <lastmod>2019-06-27</lastmod>
   </url>
 </urlset>
